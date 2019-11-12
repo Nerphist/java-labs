@@ -20,7 +20,7 @@ public class FileStats {
         String contents;
         try {
             contents = FileReaders.readWholeFile(fileName);
-        } catch (IOError e) {
+        } catch (NullPointerException e) {
             throw new FileStatsException("File was not found", e);
         }
         characterOccurrences = new HashMap<>();
