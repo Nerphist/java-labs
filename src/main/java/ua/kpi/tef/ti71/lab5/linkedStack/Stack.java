@@ -1,7 +1,5 @@
 package ua.kpi.tef.ti71.lab5.linkedStack;
 
-import ua.kpi.tef.ti71.lab5.util.Node;
-
 /**
  *
  * Stack is a data structure that follows "last in, first out" rule (LIFO).

@@ -1,6 +1,6 @@
 package ua.kpi.tef.ti71.lab5.linkedQueue;
 
-import ua.kpi.tef.ti71.lab5.util.NodeOneSided;
+import ua.kpi.tef.ti71.lab5.util.Node;
 
 /**
  * {@link LinkedQueue} implements FIFO {@link Queue}, using singly linked nodes. Nodes are stores in instances of nested
@@ -10,8 +10,8 @@ import ua.kpi.tef.ti71.lab5.util.NodeOneSided;
  * @param <T> a generic parameter
  */
 public class LinkedQueue<T> implements Queue<T> {
-    private NodeOneSided<T> head;
-    private NodeOneSided<T> tail;
+    private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     public LinkedQueue() {
@@ -28,9 +28,9 @@ public class LinkedQueue<T> implements Queue<T> {
     @Override
     public void add(T element) {
         if (size == 0) {
-            this.tail = this.head = new NodeOneSided<>(element);
+            this.tail = this.head = new Node<>(element);
         } else {
-            var newNode = new NodeOneSided<>(element);
+            var newNode = new Node<>(element);
             this.tail.setPrevious(newNode);
             this.tail = newNode;
         }
