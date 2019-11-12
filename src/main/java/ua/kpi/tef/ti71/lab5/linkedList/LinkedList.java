@@ -1,15 +1,15 @@
 package ua.kpi.tef.ti71.lab5.linkedList;
 
-import ua.kpi.tef.ti71.lab5.util.Node;
+import ua.kpi.tef.ti71.lab5.util.NodeOneSided;
 
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
- * inner static class {@link Node<T>}. In order to keep track on nodes, {@link LinkedList} keeps a reference to a head node.
+ * inner static class {@link NodeOneSided<T>}. In order to keep track on nodes, {@link LinkedList} keeps a reference to a head node.
  *
  * @param <T> generic type parameter
  */
 public class LinkedList<T> implements List<T> {
-    private Node<T> head;
+    private NodeOneSided<T> head;
     private int size;
 
     public LinkedList() {
@@ -17,14 +17,14 @@ public class LinkedList<T> implements List<T> {
         this.head = null;
     }
 
-    public LinkedList(Node<T> head, Integer size) {
+    public LinkedList(NodeOneSided<T> head, Integer size) {
         this.head = head;
         this.size = size;
     }
 
-    private Node<T> getNode(int index) {
+    private NodeOneSided<T> getNode(int index) {
         int pointing = this.size - 1;
-        Node<T> selected = this.head;
+        NodeOneSided<T> selected = this.head;
         while (pointing != index) {
             if (selected == null) {
                 throw new IndexOutOfBoundsException();
@@ -44,9 +44,9 @@ public class LinkedList<T> implements List<T> {
      * @return a new list of elements the were passed as method parameters
      */
     public static <T> List<T> of(T... elements) {
-        Node<T> head = null;
+        NodeOneSided<T> head = null;
         for (T element : elements) {
-            head = new Node<>(head, element);
+            head = new NodeOneSided<>(head, element);
         }
         return new LinkedList<>(head, elements.length);
     }
@@ -58,7 +58,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(T element) {
-        this.head = new Node<>(this.head, element);
+        this.head = new NodeOneSided<>(this.head, element);
         this.size++;
     }
 
@@ -74,10 +74,11 @@ public class LinkedList<T> implements List<T> {
         if (index > this.size || index < 0) {
             throw new IndexOutOfBoundsException();
         } else if (index == this.size) {
-            this.head = new Node<>(this.head, element);
+            this.head = new NodeOneSided<>(this.head, element);
         } else {
-            Node<T> selected = getNode(index);
-            new Node<>(selected.getPrevious(), element, selected);
+            NodeOneSided<T> selected = getNode(index);
+            var newNode = new NodeOneSided<>(selected.getPrevious(), element);
+            selected.setPrevious(newNode);
         }
         this.size++;
     }
@@ -103,7 +104,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public T get(int index) {
-        Node<T> selected = getNode(index);
+        NodeOneSided<T> selected = getNode(index);
         if (selected == null) {
             throw new IndexOutOfBoundsException();
         }
@@ -118,8 +119,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void remove(int index) {
-        Node<T> selected = getNode(index);
-        selected.unlink();
+        NodeOneSided<T> selected = getNode(index);
         if (selected == this.head) {
             this.head = this.head.getPrevious();
         }
@@ -134,7 +134,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public boolean contains(T element) {
-        Node<T> selected = this.head;
+        NodeOneSided<T> selected = this.head;
         while (selected != null) {
             if (selected.getValue().equals(element)) {
                 return true;
@@ -171,5 +171,12 @@ public class LinkedList<T> implements List<T> {
     public void clear() {
         this.head = null;
         this.size = 0;
+    }
+
+    public static void main(String[] args) {
+        var intList = LinkedList.of(43, 5, 6, 8);
+
+        intList.add(1,23);
+        System.out.println(intList.get(0));
     }
 }
