@@ -24,7 +24,7 @@ public class ReflectionUtils {
         List<Method> methods = new LinkedList<Method>();
         Class clazz = object.getClass();
         while (!clazz.equals(Object.class)) {
-            methods.addAll(Arrays.asList(clazz.getMethods()));
+            methods.addAll(Arrays.asList(clazz.getDeclaredMethods()));
             clazz = clazz.getSuperclass();
         }
         return methods;

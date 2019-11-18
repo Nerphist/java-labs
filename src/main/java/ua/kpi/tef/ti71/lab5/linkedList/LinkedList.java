@@ -9,22 +9,22 @@ import ua.kpi.tef.ti71.lab5.util.Node;
  * @param <T> generic type parameter
  */
 public class LinkedList<T> implements List<T> {
-    private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     public LinkedList() {
         this.size = 0;
-        this.head = null;
+        this.tail = null;
     }
 
-    public LinkedList(Node<T> head, Integer size) {
-        this.head = head;
+    public LinkedList(Node<T> tail, Integer size) {
+        this.tail = tail;
         this.size = size;
     }
 
     private Node<T> getNode(int index) {
         int pointing = this.size - 1;
-        Node<T> selected = this.head;
+        Node<T> selected = this.tail;
         while (pointing != index) {
             if (selected == null) {
                 throw new IndexOutOfBoundsException();
@@ -58,7 +58,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(T element) {
-        this.head = new Node<>(this.head, element);
+        this.tail = new Node<>(this.tail, element);
         this.size++;
     }
 
@@ -74,7 +74,7 @@ public class LinkedList<T> implements List<T> {
         if (index > this.size || index < 0) {
             throw new IndexOutOfBoundsException();
         } else if (index == this.size) {
-            this.head = new Node<>(this.head, element);
+            this.tail = new Node<>(this.tail, element);
         } else {
             Node<T> selected = getNode(index);
             var newNode = new Node<>(selected.getPrevious(), element);
@@ -120,8 +120,8 @@ public class LinkedList<T> implements List<T> {
     @Override
     public void remove(int index) {
         Node<T> selected = getNode(index);
-        if (selected == this.head) {
-            this.head = this.head.getPrevious();
+        if (selected == this.tail) {
+            this.tail = this.tail.getPrevious();
         }
         this.size--;
     }
@@ -134,7 +134,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public boolean contains(T element) {
-        Node<T> selected = this.head;
+        Node<T> selected = this.tail;
         while (selected != null) {
             if (selected.getValue().equals(element)) {
                 return true;
@@ -169,7 +169,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void clear() {
-        this.head = null;
+        this.tail = null;
         this.size = 0;
     }
 
