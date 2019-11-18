@@ -1,0 +1,5 @@
+FROM sonarqube:6.7
+ADD ./start.sh /opt/sonarqube/
+RUN chmod 755 /opt/sonarqube/start.sh
+USER sonarqube
+ENTRYPOINT ["/bin/bash","-c","/opt/sonarqube/start.sh"]
