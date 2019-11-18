@@ -9,7 +9,10 @@ public class FileStatsTest {
 
     @Test
     public void testCreateFileStatsFromExistingFile() {
-        FileStats fileStats = FileStats.from("sotl.txt");
+        assertDoesNotThrow(() -> {
+                    FileStats fileStats = FileStats.from("sotl.txt");
+                }
+        );
     }
 
     @Test

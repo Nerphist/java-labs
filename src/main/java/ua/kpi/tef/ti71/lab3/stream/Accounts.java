@@ -12,10 +12,10 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
 public interface Accounts {
+    static final Random RANDOM = new Random();
     static Account getAccount(){
         Fairy fairy = Fairy.create();
         Person person = fairy.person();
-        Random random = new Random();
 
 
         Account fakeAccount = new Account();
@@ -27,7 +27,7 @@ public interface Accounts {
                 person.getDateOfBirth().getMonthValue(),
                 person.getDateOfBirth().getDayOfMonth()));
         fakeAccount.setSex(Sex.valueOf(person.getSex().name()));
-        fakeAccount.setBalance(BigDecimal.valueOf(random.nextInt(200_000)));
+        fakeAccount.setBalance(BigDecimal.valueOf(RANDOM.nextInt(200_000)));
         fakeAccount.setCreationDate(LocalDate.now());
 
         return fakeAccount;

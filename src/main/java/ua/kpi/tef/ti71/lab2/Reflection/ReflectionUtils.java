@@ -10,6 +10,9 @@ import java.util.List;
 
 public class ReflectionUtils {
 
+    private ReflectionUtils() {
+    }
+
     public static List<Field> getAllFields(Object object) {
         List<Field> fields = new LinkedList<Field>();
         Class clazz = object.getClass();
@@ -66,7 +69,6 @@ public class ReflectionUtils {
 
                     System.out.println(method.getName() + " invoked successfully");
                 } catch (Exception e){
-                    e.printStackTrace();
                 }
             }
         }
@@ -77,7 +79,7 @@ public class ReflectionUtils {
     }
 
     public static <T> List<String> getInterfaceNames(Object object) {
-        List<String> interfaceNames = new LinkedList<String>();
+        List<String> interfaceNames = new LinkedList<>();
 
         for (Class clazz : getAllInterfaces(object)) {
             interfaceNames.add(clazz.getSimpleName());

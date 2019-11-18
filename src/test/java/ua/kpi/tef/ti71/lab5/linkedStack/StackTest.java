@@ -11,7 +11,9 @@ public class StackTest {
 
 	@Test
 	public void testPushElementOntoEmptyStack() {
-		intStack.push(234);
+		assertDoesNotThrow(()->{
+			intStack.push(234);
+		});
 	}
 
 	@Test
