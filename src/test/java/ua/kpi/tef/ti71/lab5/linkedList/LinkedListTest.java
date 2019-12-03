@@ -2,12 +2,17 @@ package ua.kpi.tef.ti71.lab5.linkedList;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.kpi.tef.ti71.lab5.linkedList.LinkedList;
 import ua.kpi.tef.ti71.lab5.linkedList.List;
 
 public class LinkedListTest {
 
     private List<Integer> intList = new LinkedList<>();
+    private final Logger logger
+            = LoggerFactory.getLogger(LinkedList.class);
 
     @Test
     public void testAddIntoEmptyList() {
@@ -15,6 +20,8 @@ public class LinkedListTest {
 
         assertEquals(1, intList.size());
         assertEquals(41, intList.get(0).intValue());
+        logger.debug("log debug");
+        logger.error("log error");
     }
 
     @Test
